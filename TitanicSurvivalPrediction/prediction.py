@@ -1,9 +1,14 @@
 import xgboost as xgb
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+import os
 
 # Load the saved XGBoost model
 model = xgb.Booster()
+try:
+    os.chdir(os.path.dirname(__file__))
+except:
+    pass
 model.load_model('titanic_model_xgboost.json')
 
 # Function to get user input for prediction
@@ -28,13 +33,15 @@ def get_user_input():
 
     return pd.DataFrame([user_data])
 
+
 # Get user input
 user_input_data = get_user_input()
 
 # Convert categorical data to numeric using label encoding
 label_encoder = LabelEncoder()
 user_input_data['Sex'] = label_encoder.fit_transform(user_input_data['Sex'])
-user_input_data['Embarked'] = label_encoder.fit_transform(user_input_data['Embarked'])
+user_input_data['Embarked'] = label_encoder.fit_transform(
+    user_input_data['Embarked'])
 
 # Make prediction
 user_input_dmatrix = xgb.DMatrix(user_input_data)
@@ -45,6 +52,8 @@ prediction_binary = 1 if prediction > 0.5 else 0
 
 # Display the prediction
 if prediction_binary == 1:
-    print("The passenger is predicted to survive by chance of " + str(prediction * 100) + "%.")
+    print("The passenger is predicted to survive by chance of " +
+          str(prediction * 100) + "%.")
 else:
-    print("The passenger is predicted not to survive by chance of" + str((1 - prediction) * 100) + "%.")
+    print("The passenger is predicted not to survive by chance of" +
+          str((1 - prediction) * 100) + "%.")

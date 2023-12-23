@@ -1,13 +1,20 @@
 import pandas as pd
 import joblib
+import os
+
 
 def preprocess_input(input_data):
     # Implement the same preprocessing steps as in the training phase
     # Adjust this function based on the preprocessing steps used in your training script
     return input_data
 
+
 def main():
     # Load the saved model
+    try:
+        os.chdir(os.path.dirname(__file__))
+    except:
+        pass
     loaded_model = joblib.load('best_model.pkl')
 
     # Get user input for house features
@@ -23,7 +30,8 @@ def main():
     hotwaterheating = input("Hot water heating (yes/no): ").lower()
     airconditioning = input("Air conditioning (yes/no): ").lower()
     prefarea = input("Preferred area (yes/no): ").lower()
-    furnishingstatus = input("Furnishing status (furnished/semi-furnished/unfurnished): ").lower()
+    furnishingstatus = input(
+        "Furnishing status (furnished/semi-furnished/unfurnished): ").lower()
 
     # Create a DataFrame with the user input
     input_data = pd.DataFrame({
@@ -50,6 +58,7 @@ def main():
     # Display the prediction
     print("\nPredicted house price:")
     print(prediction)
+
 
 if __name__ == "__main__":
     main()

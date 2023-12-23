@@ -1,8 +1,14 @@
 import pandas as pd
 import joblib
+import os
 
 # Load the saved model
+try:
+    os.chdir(os.path.dirname(__file__))
+except:
+    pass
 best_model = joblib.load('best_car_price_model.pkl')
+
 
 # Collect user input for new data with default values
 print("Enter the features for prediction (press Enter to use default values):")
