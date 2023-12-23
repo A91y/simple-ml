@@ -6,6 +6,7 @@ def main():
     print("1. Car Price Prediction")
     print("2. Housing Price Prediction")
     print("3. Titanic Survival Prediction")
+    print("4. Exit")
     choice = input()
 
     if choice == '1':
@@ -34,4 +35,5 @@ def main():
     subprocess.run([sys.executable, f'{model_dir}/{script}'])
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()
