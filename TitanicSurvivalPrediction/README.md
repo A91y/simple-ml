@@ -19,7 +19,7 @@ The data preprocessing steps include:
 - Filling missing values in 'Age', 'Embarked', and 'Fare'.
 - Converting categorical data to numeric using label encoding.
 - LabelEncoder is used to convert the categorical features ‘Sex’ and ‘Embarked’ into numerical values. This is necessary because the XGBoost model, which is being used for prediction, can only handle numerical values.
-- It's working can be summarized as two steps first being  Instantiating the LabelEncoder, and second being Fit and Transform
+- It's working can be summarized as two steps first being  Instantiating the LabelEncoder, and second being Fitting and Transforming.
 
 ## Model Training
 
